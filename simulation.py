@@ -18,7 +18,10 @@ def simulation():
 if __name__ == "__main__":
     simulation()
     
-# Edição Jonatas
+if __name__ == "__main__":
+    wave_1d = scalar.Wavefield_1D() 
+    wave_1d.set_model()
+    wave_1d.plot_model()
 
 
 

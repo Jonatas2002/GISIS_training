@@ -24,7 +24,7 @@ class Wavefield_1D():
     def set_model(self):
         interfaces = []
         for i in range(len(self.prof)):
-            start_depth = (self.prof[i] - self.prof[0]) / self.dz
+            start_depth = int(self.prof[i - 1] / self.dz)
             end_depth = self.prof[i] / self.dz
             vel = self.velocities[i]
             interfaces.append((start_depth, end_depth, vel))

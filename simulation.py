@@ -13,15 +13,12 @@ def simulation():
 
     myWave[id].set_wavelet()
     myWave[id].plot_wavelet()
+    myWave[id].set_model()
+    myWave[id].plot_model()
 
 
 if __name__ == "__main__":
     simulation()
-    
-if __name__ == "__main__":
-    wave_1d = scalar.Wavefield_1D() 
-    wave_1d.set_model()
-    wave_1d.plot_model()
 
 
 

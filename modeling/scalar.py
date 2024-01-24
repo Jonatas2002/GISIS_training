@@ -13,12 +13,12 @@ class Wavefield_1D():
         self.dt = 1e-3
         self.fmax = 30.0
         
-        self.nz = 1000
+        self.nz = 1001
         self.dz = 10
         self.model = np.zeros(self.nz)
         self.depth = np.arange(self.nz) * self.dz
         
-        self.prof = np.array([2000, 4000, 6000, 8000, 10000])
+        self.prof = np.array([2000, 4000, 6000, 8000, 10010])
         self.velocities = np.array((1500, 4000, 2000, 4500, 5000))
         
     def set_model(self):

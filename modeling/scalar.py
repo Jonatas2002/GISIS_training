@@ -13,13 +13,16 @@ class Wavefield_1D():
         self.dt = 1e-3
         self.fmax = 30.0
         
-        self.nz = 1001
+        self.nz = 1000
         self.dz = 10
         self.model = np.zeros(self.nz)
         self.depth = np.arange(self.nz) * self.dz
         
         self.prof = np.array([2000, 4000, 6000, 8000, 10010])
         self.velocities = np.array((1500, 4000, 2000, 4500, 5000))
+        
+        self.fonte = np.array([100, 500, 1000])
+        self.receptor = np.array([3000, 5000, 7000])
         
     def set_model(self):
         interfaces = []
@@ -38,12 +41,15 @@ class Wavefield_1D():
     def plot_model(self):
         fig, ax = plt.subplots(figsize=(3, 6), clear=True)
         ax.plot(self.model, self.depth)
+        ax.plot(self.model[self.fonte//self.dz], self.fonte,  '*', color='red', label='Fonte', markersize = 10)
+        ax.plot(self.model[self.receptor//self.dz], self.receptor,   'v' , color='blue', label='Receptor', markersize = 10)
         ax.set_title("Velocity Model", fontsize=18)
         ax.set_xlabel("Velocity [m/s]", fontsize=15)
         ax.set_ylabel("Depth [m]", fontsize=15) 
         ax.set_ylim(max(self.depth), min(self.depth))
-
+        
         fig.tight_layout()
+        fig.savefig('VelocityModel.png')
         plt.show()   
                
     def get_type(self):

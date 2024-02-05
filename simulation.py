@@ -1,4 +1,5 @@
 from modeling import scalar
+from time import time
 
 def simulation():
 
@@ -17,11 +18,11 @@ def simulation():
     myWave[id].set_model()
     myWave[id].plot_model()
     
-    #start = time()
+    start = time()
     myWave[id].wave_propagation()
-    #end = time()
+    end = time()
 
-    #print(end - start)
+    print(end - start)
     myWave[id].plot_wavefield()
 
 

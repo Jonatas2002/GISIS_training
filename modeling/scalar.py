@@ -79,6 +79,7 @@ class Wavefield_1D():
         ax.set_ylabel("Depth [m]", fontsize = 15) 
         
         fig.tight_layout()
+        fig.savefig('Wavefield.png')
         plt.show() 
 
     def plot_model(self):

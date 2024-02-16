@@ -26,7 +26,7 @@ def simulation():
     myWave[id].plot_model()
     myWave[id].plot_wavefield()
     myWave[id].plot_seismogram()
-   # myWave[id].plot_wave_propagation()
+    myWave[id].plot_wave_propagation()
 
 if __name__ == "__main__":
     simulation()

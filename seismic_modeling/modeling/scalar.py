@@ -24,7 +24,7 @@ class Wavefield_1D():
 
         
         self.prof = np.array([2000, 4000, 6000, 8000, 10010])
-        self.velocities = np.array((1500, 4000, 2000, 4500, 5000))
+        self.velocities = np.array([1500, 4000, 2000, 4500, 5000])
         
         self.fonte = np.array([100, 500, 1000])
         self.receptor = np.array([3000, 5000, 7000])

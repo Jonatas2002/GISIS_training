@@ -15,9 +15,4 @@ functions.plot_reta(x,yn)
 
 mat = functions.solution_space(x,y)
 
-a0_ind, a1_ind = np.where(mat == np.min(mat))
-
-print(a0_ind, a1_ind)
-
-plt.imshow(mat, extent = [-5,5,-5,5])
-plt.show()
+functions.plot_solution_space(mat)

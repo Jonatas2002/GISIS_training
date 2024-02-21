@@ -36,10 +36,22 @@ def solution_space(x,y):
 		for j in range(n):	
 			y_p = a0[i,j] + a1[i,j]*x	
 	
-			mat[i,j] = np.sqrt(np.sum((y - y_p)**2))
+			mat[i,j] = np.sqrt(np.sum((y - y_p)**2))  
 		
 	return mat
 
-
-
 # plotar o espaço solução
+def plot_solution_space(mat):
+    #a0_ind, a1_ind = np.where(mat == np.min(mat))
+    #print(a0_ind, a1_ind)
+    min_ind = np.unravel_index(np.argmin(mat), mat.shape)
+    fig, ax = plt.subplots()
+    ax.imshow(mat, extent = [-5,5,-5,5])
+
+    ax.plot(np.interp(min_ind[1], (0, 1001), (-5, 5)),
+            np.interp(min_ind[0], (0, 1001), (-5, 5)), 
+            color='red', marker='o')
+    
+    fig.tight_layout()	
+    plt.show()
+

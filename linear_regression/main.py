@@ -12,6 +12,7 @@ yn = functions.ruido(y)
 
 functions.plot_reta(x,y)
 functions.plot_reta(x,yn)
+functions.plot_reta_ruido(x,y, yn)
 
 mat = functions.solution_space(x,y)
 

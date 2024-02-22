@@ -8,8 +8,8 @@ def reta(a0, a1, x):
 
 # aplicar o ruido no eixo y
 def ruido(y):
-	y_n = y + np.random.rand(len(y))
-	return y_n
+    y_n = y + np.random.rand(len(y))
+    return y_n
 
 # visualização da reta
 def plot_reta(x,y):
@@ -17,6 +17,16 @@ def plot_reta(x,y):
 	ax.plot(x,y)
 	
 	fig.tight_layout()	
+	plt.show()
+ 
+# visualização da reta
+def plot_reta_ruido(x,y, yn):
+	fig, ax = plt.subplots()
+	ax.plot (x,y,label='y limpo')
+	ax.plot (x,yn, '-', label='y corrompido')
+ 
+	fig.tight_layout()	        
+	fig.savefig('linear_regression/RetaRuido.png')
 	plt.show()
 
 # criar espaço solução com varios coeficientes a0 e a1
@@ -53,5 +63,7 @@ def plot_solution_space(mat):
     ax.plot(min_a0, -min_a1, color='red', marker='o')
     
     fig.tight_layout()	
+    fig.savefig('linear_regression/SolutionSpace.png')
+
     plt.show()
 

@@ -45,12 +45,12 @@ def plot_solution_space(mat):
     #a0_ind, a1_ind = np.where(mat == np.min(mat))
     #print(a0_ind, a1_ind)
     min_ind = np.unravel_index(np.argmin(mat), mat.shape)
+    min_a0 = np.linspace(-5,5,1001)[min_ind[1]]
+    min_a1 = np.linspace(-5,5,1001)[min_ind[0]]
+    
     fig, ax = plt.subplots()
     ax.imshow(mat, extent = [-5,5,-5,5])
-
-    ax.plot(np.interp(min_ind[1], (0, 1001), (-5, 5)),
-            np.interp(min_ind[0], (0, 1001), (-5, 5)), 
-            color='red', marker='o')
+    ax.plot(min_a0, -min_a1, color='red', marker='o')
     
     fig.tight_layout()	
     plt.show()

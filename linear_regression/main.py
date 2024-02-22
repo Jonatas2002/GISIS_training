@@ -1,5 +1,4 @@
 import functions
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -11,6 +10,7 @@ a1 = -1
 y = functions.reta(a0, a1, x)
 yn = functions.ruido(y)
 
+functions.plot_reta(x,y)
 functions.plot_reta(x,yn)
 
 mat = functions.solution_space(x,y)

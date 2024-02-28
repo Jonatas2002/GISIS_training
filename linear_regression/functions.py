@@ -12,7 +12,7 @@ def build_polynomial_function(x, parameters):
 
 # aplicar o ruido no eixo y
 def add_noise(data, noise_amp):
-    return data + noise_amp*(0.5 *np.random.rand(len(data)))
+    return data + noise_amp*(np.random.rand(len(data)))
 
 # visualização da reta
 def plot_reta(x,y):
@@ -24,7 +24,7 @@ def plot_reta(x,y):
  
 # visualização da reta
 def plot_reta_ruido(x,y, yn):
-	fig, ax = plt.subplots()
+	fig, ax = plt.subplots(ncols = 1, nrows = 1, figsize = (7,5))
 	ax.plot (x,y,label='y limpo')
 	ax.plot (x,yn, '-', label='y corrompido')
  
@@ -70,7 +70,7 @@ def plot_solution_space(mat):
     min_a0 = np.linspace(-5,5,1001)[min_ind[1]]
     min_a1 = np.linspace(-5,5,1001)[min_ind[0]]
     
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(ncols = 1, nrows = 1, figsize = (7,7))
     ax.imshow(mat, extent = [-5,5,-5,5])
     ax.plot(min_a0, -min_a1, color='red', marker='o')
     

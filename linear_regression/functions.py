@@ -2,14 +2,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # função que descreve a reta
-def reta(a0, a1, x):
-	y = a0 + a1*x
-	return y 
+def build_polynomial_function(x, parameters):
+
+    function = 0.0
+    for n, p in enumerate(parameters):  # A função enumerate gera um loop de elementos definidos pelo usuario
+        function += p*x**n    # nesse caso, um loop de p*x^0 até p*x^n  (# a0 + a1.x + a2.x² + a3.x³ + ...)
+
+    return function
 
 # aplicar o ruido no eixo y
-def ruido(y):
-    y_n = y + np.random.rand(len(y))
-    return y_n
+def add_noise(data, noise_amp):
+    return data + noise_amp*(0.5 *np.random.rand(len(data)))
 
 # visualização da reta
 def plot_reta(x,y):
@@ -31,12 +34,12 @@ def plot_reta_ruido(x,y, yn):
 
 # criar espaço solução com varios coeficientes a0 e a1
 # correlacionar atraves da norma L2 a diferença
-def solution_space(x,y):
+def solution_space(x,y, a0, a1, n):
 	
-	n = 1001
+	#n = 1001
 	
-	a0 = np.linspace(-4,4,n)
-	a1 = np.linspace(-5,5,n)
+	#a0 = np.linspace(-4,4,n)
+	#a1 = np.linspace(-5,5,n)
 	
 	a0, a1 = np.meshgrid(a0,a1)
 	
@@ -50,10 +53,19 @@ def solution_space(x,y):
 		
 	return mat
 
+def solution_space2(velocity, depth, x, y):
+    mat2 = np.zeros((len(depth),len(velocity)))
+
+    for i in range(len(depth)):
+        for j in range(len(velocity)):
+            y_p = np.sqrt((x**2 + 4*depth[i]**2) / velocity[j]**2)
+            
+            mat2[i, j] = np.sqrt(np.sum((y - y_p)**2))
+
+    return mat2
+
 # plotar o espaço solução
 def plot_solution_space(mat):
-    #a0_ind, a1_ind = np.where(mat == np.min(mat))
-    #print(a0_ind, a1_ind)
     min_ind = np.unravel_index(np.argmin(mat), mat.shape)
     min_a0 = np.linspace(-5,5,1001)[min_ind[1]]
     min_a1 = np.linspace(-5,5,1001)[min_ind[0]]
@@ -66,4 +78,17 @@ def plot_solution_space(mat):
     fig.savefig('linear_regression/SolutionSpace.png')
 
     plt.show()
+        
+
+def least_squares_solver(x, d, M):
+
+    G = np.zeros((len(d), M))   # Criação de uma matriz G de len(d) linhas e M coluna com
+
+    for n in range(M):
+        G[:,n] = x**n          # Adicionando valores na matriz
+
+    GTG = np.dot(G.T, G)       # G.T matriz transposta de G multiplicada pela matriz G
+    GTd = np.dot(G.T, d)       # G.T matriz transposta de G multiplicada pela matriz d
+
+    return np.linalg.solve(GTG, GTd)    # solution of a linear system
 

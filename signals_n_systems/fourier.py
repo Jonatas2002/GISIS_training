@@ -53,13 +53,13 @@ title = "Second example"
 
 signal2 = np.zeros(domain)
 
-for n in range(1, 501):
+for n in range(1, 50):
     signal2 += (-2*np.sin(n*t)/n) * ((-1)**n + (np.sin(n*np.pi)/n*np.pi))
 
 fig, ax = plt.subplots(num = title, figsize = (15,5))
 
 ax.plot(t, signal2 - np.pi, label = "Fourier series")
-ax.plot(t,t-3.14, "--", label = "Real function")
+ax.plot(t,t - np.pi, "--", label = "Real function")
 
 ax.set_xticks(xloc)
 ax.set_xticklabels(xlab)
@@ -79,14 +79,14 @@ a = (2.0 * np.pi**2)/3
 
 signal3 = a + np.zeros(domain)
 
-for n in range(1,501):
+for n in range(1,50):
     
     signal3 += ((4 * (-1)**(n + 1))/n**2) * np.cos(n*t)
     
 fig, ax = plt.subplots(num = title, figsize = (15,5))
 
 ax.plot(t, signal3 - np.pi, label = "Fourier series")
-#ax.plot(t,t-3.1, "--", label = "Real function")
+ax.plot(t, -t**2 + 2*np.pi, "--", label = "Real function")
 
 ax.set_xticks(xloc)
 ax.set_xticklabels(xlab)

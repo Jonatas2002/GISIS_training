@@ -8,11 +8,18 @@ t = np.linspace(-np.pi, np.pi, domain)
 # Simple numerical series f(t) : R -> R
 
 frequencies = np.array([2, 5, 8])  # Hz
-
+dt = 1/32
 signal = np.zeros(domain) 
 
 for f in frequencies:
     signal += np.sin(2.0*np.pi*f*t)
+    
+    
+# Transformada de Fourier do Sinal
+freq = np.fft.fftfreq(domain, dt)
+mascara = freq > 0
+Y = np.fft.fft(signal)
+Amp = np.abs(Y / domain)
 
 # Plot 
 
@@ -30,6 +37,17 @@ ax.set_xticklabels(xlab)
 ax.set_xlim([-np.pi, np.pi])
 
 ax.set_xlabel("t [s]", fontsize = 15)
+ax.set_ylabel("Amplitude", fontsize = 15)
+
+fig.tight_layout()
+plt.show()
+
+
+fig, ax = plt.subplots(num = "Simple signal - FFT", figsize = (15,5))
+
+ax.plot(freq[mascara], Amp[mascara])
+
+ax.set_xlabel("Frequencia", fontsize = 15)
 ax.set_ylabel("Amplitude", fontsize = 15)
 
 fig.tight_layout()

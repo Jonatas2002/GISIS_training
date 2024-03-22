@@ -35,6 +35,8 @@ ax.set_ylabel("Amplitude", fontsize = 15)
 fig.tight_layout()
 plt.show()
 
+# --------------------------------------------------
+# --------------------------------------------------
 
 title = "First example"
 
@@ -48,6 +50,25 @@ for n in range(1,501):
 
     signal += c*np.cos(n*t) + n*c*np.sin(n*t)
 
+fig, ax = plt.subplots(num = title, figsize = (15,5))
+
+ax.plot(t, signal - np.pi, label = "Fourier series")
+ax.plot(t, np.exp(-t), "--", label = "Real function")
+
+ax.set_xticks(xloc)
+ax.set_xticklabels(xlab)
+ax.set_xlim([-np.pi, np.pi])
+
+ax.set_xlabel("t [s]", fontsize = 15)
+ax.set_ylabel("Amplitude", fontsize = 15)
+
+ax.legend(loc = "upper left", fontsize = 15)
+
+fig.tight_layout()
+plt.show()
+
+# --------------------------------------------------
+# --------------------------------------------------
 
 title = "Second example"
 
@@ -72,6 +93,9 @@ ax.legend(loc = "upper left", fontsize = 15)
 
 fig.tight_layout()
 plt.show()
+
+# --------------------------------------------------
+# --------------------------------------------------
 
 title = "Third example"
 
@@ -100,21 +124,3 @@ ax.legend(loc = "upper left", fontsize = 15)
 fig.tight_layout()
 plt.show()
 
-
-
-# fig, ax = plt.subplots(num = title, figsize = (15,5))
-
-# ax.plot(t, signal - np.pi, label = "Fourier series")
-# ax.plot(t, np.exp(-t), "--", label = "Real function")
-
-# ax.set_xticks(xloc)
-# ax.set_xticklabels(xlab)
-# ax.set_xlim([-np.pi, np.pi])
-
-# ax.set_xlabel("t [s]", fontsize = 15)
-# ax.set_ylabel("Amplitude", fontsize = 15)
-
-# ax.legend(loc = "upper left", fontsize = 15)
-
-# fig.tight_layout()
-# plt.show()

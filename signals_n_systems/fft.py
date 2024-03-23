@@ -99,3 +99,28 @@ fig.tight_layout()
 plt.grid(axis = "y")
 fig.savefig('signals_n_systems/imagens/fft_trace161.png')
 plt.show()
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+
+'''Trasnsformada Inversa de Fourier'''
+# ---------------------
+inverse_fourier = np.fft.ifft(Y1)
+
+fig, ax = plt.subplots(ncols = 1, nrows = 2, num = "TRASNFORMADA INVERSA DE FOURIER - TRAÇO 1", figsize = (15, 6))
+ax[0].set_title('Orignal Trace', fontsize = 18)
+ax[0].plot(t, trace1)
+ax[0].set_xlabel("Time [s]", fontsize = 15)
+ax[0].set_ylabel(r"$x(t)$", fontsize = 15)
+
+ax[1].set_title("Trace after inverse transformation", fontsize = 18)
+ax[1].plot(t, inverse_fourier)
+ax[1].set_xlabel("Frequency [Hz]", fontsize = 15)
+ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
+
+fig.tight_layout()
+plt.grid(axis = "y")
+fig.savefig('signals_n_systems/imagens/fft_trace1.png')
+plt.show()
+

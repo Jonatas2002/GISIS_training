@@ -9,7 +9,7 @@ dt = 1e-3
 dx = 25
 t = np.arange(nz)*dt
 
-cmp_gather = np.reshape(np.fromfile("signals_n_systems/cmp_gather_5001x161_1000us.bin", dtype=np.float32), (nx, nz))
+cmp_gather = np.reshape(np.fromfile("signals_n_systems/arquivo binario/cmp_gather_5001x161_1000us.bin", dtype=np.float32), (nx, nz))
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
@@ -56,6 +56,7 @@ ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
 
 fig.tight_layout()
 plt.grid(axis = "y")
+fig.savefig('signals_n_systems/imagens/fft_trace1.png')
 plt.show()
 
 # -----------------------------------------------------------------------------
@@ -74,6 +75,7 @@ ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
 
 fig.tight_layout()
 plt.grid(axis = "y")
+fig.savefig('signals_n_systems/imagens/fft_trace80.png')
 plt.show()
 
 # -----------------------------------------------------------------------------
@@ -92,4 +94,5 @@ ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
 
 fig.tight_layout()
 plt.grid(axis = "y")
+fig.savefig('signals_n_systems/imagens/fft_trace161.png')
 plt.show()

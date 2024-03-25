@@ -3,20 +3,22 @@ import matplotlib.pyplot as plt
 
 
 # Leitura do arquivo
-nx = 161
-nz = 5001
-dt = 1e-3
+nx = 282
+nz = 1501
+dt = 2e-3
 dx = 25
 t = np.arange(nz)*dt
 
-cmp_gather = np.reshape(np.fromfile("signals_n_systems/arquivo binario/cmp_gather_5001x161_1000us.bin", dtype=np.float32), (nx, nz))
+cmp_gather = np.reshape(np.fromfile("signals_n_systems/arquivo binario/open_data_seg_poland_vibroseis_2ms_1501x282_shot_1.bin", dtype=np.float32), (nx, nz))
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
+
+perc = np.percentile(cmp_gather, 96)
 # Vizualizando o CMP Gather
 fig, ax = plt.subplots(num = "CMP Gather", figsize = (5,7))
 ax.set_title('CMP Gather',  fontsize = 15)
-ax.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[0, nx * dx, nz * dt, 0])
+ax.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[0, nx * dx, nz * dt, 0], vmin=-perc, vmax=perc)
 ax.set_xlabel('x = offset[m]',  fontsize = 15)
 ax.set_ylabel('t = TWT [s]',  fontsize = 15)
 plt.show()
@@ -53,7 +55,7 @@ ax[1].set_title("Fast Fourier Transform - FFT", fontsize = 18)
 ax[1].plot(freq[mascara], Amp1[mascara])
 ax[1].set_xlabel("Frequency [Hz]", fontsize = 15)
 ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
-ax[1].set_xlim(0,50)
+ax[1].set_xlim(0,100)
 
 fig.tight_layout()
 plt.grid(axis = "y")
@@ -73,7 +75,7 @@ ax[1].set_title("Fast Fourier Transform - FFT", fontsize = 18)
 ax[1].plot(freq[mascara], Amp80[mascara])
 ax[1].set_xlabel("Frequency [Hz]", fontsize = 15)
 ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
-ax[1].set_xlim(0,50)
+ax[1].set_xlim(0,100)
 
 fig.tight_layout()
 plt.grid(axis = "y")
@@ -93,7 +95,7 @@ ax[1].set_title("Fast Fourier Transform - FFT", fontsize = 18)
 ax[1].plot(freq[mascara], Amp161[mascara])
 ax[1].set_xlabel("Frequency [Hz]", fontsize = 15)
 ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
-ax[1].set_xlim(0,50)
+ax[1].set_xlim(0,100)
 
 fig.tight_layout()
 plt.grid(axis = "y")

@@ -18,7 +18,7 @@ perc = np.percentile(cmp_gather, 96)
 # Vizualizando o CMP Gather
 fig, ax = plt.subplots(num = "CMP Gather", figsize = (5,7))
 ax.set_title('CMP Gather',  fontsize = 15)
-ax.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[0, nx * dx, nz * dt, 0], vmin=-perc, vmax=perc)
+ax.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[-(nx * dx)/2, (nx * dx)/2, nz * dt, 0], vmin=-perc, vmax=perc)
 ax.set_xlabel('x = offset[m]',  fontsize = 15)
 ax.set_ylabel('t = TWT [s]',  fontsize = 15)
 plt.show()
@@ -122,6 +122,5 @@ ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
 
 fig.tight_layout()
 plt.grid(axis = "y")
-fig.savefig('signals_n_systems/imagens/fft_trace1.png')
 plt.show()
 

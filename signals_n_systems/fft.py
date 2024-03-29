@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import matplotlib.gridspec as gridspec
 
 # Leitura do arquivo
 nx = 282
@@ -14,34 +14,62 @@ cmp_gather = np.reshape(np.fromfile("signals_n_systems/arquivo binario/open_data
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
-perc = np.percentile(cmp_gather, 96)
-# Vizualizando o CMP Gather
-fig, ax = plt.subplots(num = "CMP Gather", figsize = (5,7))
-ax.set_title('CMP Gather',  fontsize = 15)
-ax.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[-(nx * dx)/2, (nx * dx)/2, nz * dt, 0], vmin=-perc, vmax=perc)
-ax.set_xlabel('x = offset[m]',  fontsize = 15)
-ax.set_ylabel('t = TWT [s]',  fontsize = 15)
-plt.show()
-# -----------------------------------------------------------------------------
-# -----------------------------------------------------------------------------
-
 trace1 = cmp_gather[0,:]
 trace80 = cmp_gather[79,:]
+trace100 = cmp_gather[99,:]
 trace161 = cmp_gather[160,:]
 
 # Transformada de Fourier
 freq = np.fft.fftfreq(nz, dt)
 mascara = freq > 0
-# ---------------------
-Y1 = np.fft.fft(trace1)
-Amp1 = np.abs(Y1 / nz)
-# ---------------------
-Y80 = np.fft.fft(trace80)
-Amp80 = np.abs(Y80 / nz)
-# ---------------------
-Y161 = np.fft.fft(trace161)
-Amp161 = np.abs(Y161 / nz)
 
+# ---------------------
+Amp1 = np.abs(np.fft.fft(trace1) / nz)
+# ---------------------
+Amp80 = np.abs(np.fft.fft(trace80) / nz)
+# ---------------------
+Amp100 = 2000.0 * np.abs(np.fft.fft(trace100) / nz)
+# ---------------------
+Amp161 = np.abs(np.fft.fft(trace161) / nz)
+
+# -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+
+perc = np.percentile(cmp_gather, 90)
+# Vizualizando o CMP Gather
+
+
+# Crie os subplots com tamanhos diferentes
+# Defina os tamanhos dos subplots
+widths = [5, 2]  # largura do primeiro e segundo subplot, respectivamente
+heights = [7]  # altura do subplot único (1 linha)
+
+# Crie uma grade de subplots com tamanhos diferentes
+fig = plt.figure(figsize=(sum(widths), max(heights)))
+gs = gridspec.GridSpec(len(heights), len(widths), width_ratios=widths, height_ratios=heights)
+
+# Adicione os subplots
+ax0 = plt.subplot(gs[0, 0])
+ax1 = plt.subplot(gs[0, 1])
+
+#fig, ax = plt.subplots(ncols=2, nrows=1, num = "CMP Gather", figsize = (5,7))
+ax0.set_title('CMP Gather',  fontsize = 15)
+ax0.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[-(nx * dx)/2, (nx * dx)/2, nz * dt, 0], vmin=-perc, vmax=perc)
+ax0.plot(trace100 - 1025, t, 'red', '---')
+
+ax0.set_xlabel('x = offset[m]',  fontsize = 15)
+ax0.set_ylabel('t = TWT [s]',  fontsize = 15)
+ax0.set_xticks(np.arange(-3525,3526,1175))
+
+ax1.set_title("Trace 100 - FFT", fontsize = 15)
+ax1.plot(Amp100, freq)
+ax1.set_xlabel("Frequency [Hz]", fontsize = 11)
+ax1.set_ylabel(r"$X(f)$", fontsize = 11)
+ax1.set_ylim(100,-100)
+
+fig.tight_layout()
+fig.savefig('signals_n_systems/imagens/fft_trace100.png')
+plt.show()
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
@@ -107,7 +135,7 @@ plt.show()
 
 '''Trasnsformada Inversa de Fourier'''
 # ---------------------
-inverse_fourier = np.fft.ifft(Y1)
+inverse_fourier = np.fft.ifft(np.fft.fft(trace1) )
 
 fig, ax = plt.subplots(ncols = 1, nrows = 2, num = "TRASNFORMADA INVERSA DE FOURIER - TRAÇO 1", figsize = (15, 6))
 ax[0].set_title('Orignal Trace', fontsize = 18)
@@ -123,4 +151,3 @@ ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
 fig.tight_layout()
 plt.grid(axis = "y")
 plt.show()
-

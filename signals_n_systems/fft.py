@@ -151,3 +151,38 @@ ax[1].set_ylabel(r"$X(f)$", fontsize = 15)
 fig.tight_layout()
 plt.grid(axis = "y")
 plt.show()
+
+
+
+# ------------------------------------------------------------------
+# ------------------------------------------------------------------
+def calc_freq_med(DATA, dt): 
+  """ 
+    Função para o cálculo do espectro de frequências médio do dado de entrada DATA.
+    Recebe:
+        DATA: Dado de entrada em formato (amostras, traços). (np.ndarray)
+        dt = Taxa de amostragem do dado em segundos (s). (float)
+    Devolve:
+        Duas arrays contendo a amplitude média (DADO_f) para cada frequência 
+    (FREQSf) do dado de entrada. 
+    """
+  DADO_f = 0
+  for i in range(DATA.shape[1]):
+    temp = np.fft.fftshift(np.fft.fft(DATA[:,i]))
+    DADO_f += np.abs(temp)/np.max(np.abs(temp))
+
+  DADO_f = DADO_f/DATA.shape[1]
+  DADO_f = DADO_f/np.max(np.abs(DADO_f))
+  FREQSf = np.fft.fftshift(np.fft.fftfreq(DATA.shape[0], d = dt))
+
+  return DADO_f, FREQSf
+
+dado_f, freqsf = calc_freq_med(cmp_gather, dt)
+
+plt.figure(dpi=100)
+plt.title('Espectro de Frequências', weight='bold', fontsize=16)
+plt.plot(freqsf[cmp_gather.shape[0]//2:], np.abs(dado_f[cmp_gather.shape[0]//2:]))
+plt.xlabel('Frequências (Hz)')
+plt.ylabel('Amplitude Normalizada')
+plt.grid(linestyle='--')
+plt.show()

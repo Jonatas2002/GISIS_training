@@ -1,10 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-shots = np.loadtxt('shots.txt', skiprows=1)
-print(shots)
-
-
 receiver_spacing = 25        
 receivers_per_shot = 320
 

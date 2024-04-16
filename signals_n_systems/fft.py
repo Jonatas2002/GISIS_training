@@ -28,14 +28,18 @@ Amp1 = np.abs(np.fft.fft(trace1) / nz)
 # ---------------------
 Amp80 = np.abs(np.fft.fft(trace80) / nz)
 # ---------------------
-Amp100 = 2000.0 * np.abs(np.fft.fft(trace100) / nz)
+Amp100 = np.abs(np.fft.fft(trace100) / nz)
 # ---------------------
 Amp161 = np.abs(np.fft.fft(trace161) / nz)
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
-perc = np.percentile(cmp_gather, 90)
+#perc = np.percentile(cmp_gather, 95)
+perc = 95
+perc_min = np.percentile(cmp_gather, 100-perc)
+perc_max = np.percentile(cmp_gather, perc)
+
 # Vizualizando o CMP Gather
 
 
@@ -54,7 +58,7 @@ ax1 = plt.subplot(gs[0, 1])
 
 #fig, ax = plt.subplots(ncols=2, nrows=1, num = "CMP Gather", figsize = (5,7))
 ax0.set_title('CMP Gather',  fontsize = 15)
-ax0.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[-(nx * dx)/2, (nx * dx)/2, nz * dt, 0], vmin=-perc, vmax=perc)
+ax0.imshow(cmp_gather.T, aspect='auto', cmap='Grays', extent=[-(nx * dx)/2, (nx * dx)/2, nz * dt, 0], vmin=perc_min, vmax=perc_max)
 ax0.plot(trace100 - 1025, t, 'red', '---')
 
 ax0.set_xlabel('x = offset[m]',  fontsize = 15)

@@ -5,7 +5,8 @@ shots = np.loadtxt('geometria/geometria2/coord_src.txt', dtype=float, skiprows=1
 station = np.loadtxt('geometria/geometria2/coord_rec.txt',  dtype=float,skiprows=1, delimiter=',')
 relation = np.loadtxt('geometria/geometria2/relational.txt', dtype=int, skiprows=1, delimiter=',')
 
-print(shots[:,2])
+shots_x = np.sqrt(shots[:,0]**2 + shots[:,1]**2)
+station_x = np.sqrt(station[:,0]**2 + station[:,1]**2)
 
 """spread = relation[0,1] - relation[0,0]
 
@@ -16,9 +17,9 @@ for i in range(len(shots)):
 
 CMPx,  CMPt = np.unique(CMP, return_counts= True)"""
 
-plt.figure()
-plt.plot(station[:,1], station[:,2], 'o')
-#plt.plot(shots, np.zeros(len(shots)), 'o')
+plt.figure(figsize=(10,2))
+plt.plot(station[:,1], station[:,0], 'o')
+plt.plot(shots[:,1], shots[:,0], 'o')
 #plt.plot(relation, np.zeros(len(relation)), 'o', alpha = 0.1, markersize=5)
 plt.show()
 

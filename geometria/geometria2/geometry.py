@@ -17,6 +17,7 @@ for i in range(len(shots)):
 
 CMPx,  CMPt = np.unique(CMP, return_counts= True)"""
 
+
 plt.figure(figsize=(10,2))
 plt.plot(station[:,1], station[:,0], 'o')
 plt.plot(shots[:,1], shots[:,0], 'o')

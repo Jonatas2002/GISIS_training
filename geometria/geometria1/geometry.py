@@ -1,9 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-shots = np.loadtxt('geometria/shots.txt', dtype=float, skiprows=1)
-station = np.loadtxt('geometria/stations.txt',  dtype=float,skiprows=1)
-relation = np.loadtxt('geometria/relation.txt', dtype=int, skiprows=1, delimiter=',')
+shots = np.loadtxt('geometria/geometria1/shots.txt', dtype=float, skiprows=1)
+station = np.loadtxt('geometria/geometria1/stations.txt',  dtype=float,skiprows=1)
+relation = np.loadtxt('geometria/geometria1/relation.txt', dtype=int, skiprows=1, delimiter=',')
 
 spread = relation[0,1] - relation[0,0]
 
